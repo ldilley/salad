@@ -20,7 +20,8 @@
 
 /* This is a test program that makes use of libsalad for demonstrational purposes. */
 
-#include <stdio.h>
+#include <stdio.h>  /* puts() */
+#include <stdlib.h> /* free() */
 
 /* Local includes */
 #include "salad/daemon.h"
@@ -39,7 +40,9 @@ void sld_start()
   for(;;)
   {
     /* Prints the time multiplied by 3 and is space separated. */
-    puts(sld_multiply_string(sld_pretty_timestamp(), 3, ' '));
+    char *heap_string = sld_multiply_string(sld_pretty_timestamp(), 3, ' ');
+    puts(heap_string);
+    free(heap_string);
     sleep(5);
   }
   return;

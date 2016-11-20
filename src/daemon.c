@@ -22,7 +22,7 @@
 #include <grp.h>       /* getgrnam() */
 #include <pwd.h>       /* getpwnam() */
 #include <stdio.h>     /* FILE, fclose(), fopen(), fprintf(), printf() */
-#include <stdlib.h>    /* exit() */
+#include <stdlib.h>    /* EXIT_FAILURE, exit() */
 #include <string.h>    /* strerror() */
 #include <sys/types.h> /* pid_t */
 #include <unistd.h>    /* fork(), getpid(), setgid(), setuid() */
