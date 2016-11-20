@@ -1,0 +1,11 @@
+*.o
+*.so
+*.crt
+*.key
+*.log
+*.out
+*.pem
+*.pid
+*.core
+test
+logs/
