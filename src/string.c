@@ -18,9 +18,10 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <errno.h>  /* errno */
+#include <stdio.h>  /* printf() */
+#include <stdlib.h> /* EXIT_FAILURE, exit(), malloc() */
+#include <string.h> /* strcat(), strerror(), strlen() */
 
 /* Local includes */
 #include "salad/string.h"
@@ -47,6 +48,12 @@ char *sld_multiply_string(char *string, int factor, char separator)
   int i;
   char separator_string[2];
   char *concat_string = (char *)malloc(strlen(string) * factor + factor); /* "+ factor" for the separator */
+
+  if(concat_string == NULL)
+  {
+    printf("Unable to allocate memory: %s\n", strerror(errno));
+    exit(EXIT_FAILURE);
+  }
 
   separator_string[0] = separator;
   separator_string[1] = '\0';
