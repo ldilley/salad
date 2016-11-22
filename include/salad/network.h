@@ -23,8 +23,8 @@
 
 #include "salad/types.h"
 
-SLD_SINT connect(char *host, SLD_USINT port);
-SLD_SINT disconnect();
+SLD_SSINT connect(char *host, SLD_USINT port);
+SLD_SSINT disconnect();
 long receive(char *packet);
 long send(char *packet);
 
