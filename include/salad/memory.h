@@ -18,17 +18,17 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef TYPES_H
-#define TYPES_H
+#ifndef MEMORY_H
+#define MEMORY_H
 
-#define SLD_FALSE 0
-#define SLD_TRUE !(SLD_FALSE)
+#include "salad/types.h"
 
-typedef unsigned char SLD_BYTE;
-typedef signed short int SLD_SSINT;
-typedef unsigned short int SLD_USINT;
-typedef signed long int SLD_SLINT;
-typedef unsigned long int SLD_ULINT;
-typedef SLD_USINT SLD_BOOL;
+/* Amount to grow object pool dynamically during add if no free slots remaining */
+#define POOL_GROW_AMOUNT 16
 
-#endif /* TYPES_H */
+void sld_init_pool(SLD_USINT object_slots);
+SLD_BOOL sld_pool_initialized();
+SLD_USINT sld_pool_add(void *ptr);
+SLD_USINT sld_free_pool();
+
+#endif /* MEMORY_H */
