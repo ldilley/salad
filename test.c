@@ -26,7 +26,6 @@
 /* Local includes */
 #include "salad/daemon.h"
 #include "salad/string.h"
-#include "salad/time.h"
 
 int main()
 {
@@ -37,13 +36,30 @@ int main()
 
 void sld_start()
 {
+  int i;
+  char *heap_string = NULL;
+
   for(;;)
   {
-    /* Prints the time multiplied by 3 and is space separated. */
-    char *heap_string = sld_multiply_string(sld_pretty_timestamp(), 3, ' ');
+    /* Prints a space-separated string multiplied by itself 3 times. */
+    heap_string = sld_multiply_string("hello!", 3, ' ');
     puts(heap_string);
-    free(heap_string);
+
+    for(i = 0; i < 32; i++)
+      sld_multiply_string("This string will be dynamically allocated.", 5, '\n');
+
+    /* sld_multiply_string() allocates memory dynamically. However, there is no need to
+     * manually track the pointer or explicitly call free() since sld_free_pool() takes
+     * care of any data allocated by salad. You may call sld_multiply_string() multiple
+     * times, but it is a good idea to call sld_free_pool() periodically to release all
+     * memory back to the operating system. */
+    sld_free_pool();
+
     sleep(5);
   }
+
+  /* When complete with salad, call sld_nuke_pool() to totally free all allocations. */
+  sld_nuke_pool();
+
   return;
 }

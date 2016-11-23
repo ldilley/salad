@@ -26,9 +26,13 @@
 /* Amount to grow object pool dynamically during add if no free slots remaining */
 #define POOL_GROW_AMOUNT 16
 
-void sld_init_pool(SLD_USINT object_slots);
+void sld_init_pool(SLD_USINT initial_size);
 SLD_BOOL sld_pool_initialized();
-SLD_USINT sld_pool_add(void *ptr);
-SLD_USINT sld_free_pool();
+SLD_ULINT sld_pool_size();
+SLD_SSINT sld_resize_pool(SLD_ULINT new_size);
+SLD_ULINT sld_pool_add(void *ptr);
+SLD_ULINT sld_objects_in_pool();
+SLD_ULINT sld_free_pool();
+void sld_nuke_pool();
 
 #endif /* MEMORY_H */
