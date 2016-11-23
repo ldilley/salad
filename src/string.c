@@ -24,6 +24,7 @@
 #include <string.h> /* strcat(), strerror(), strlen() */
 
 /* Local includes */
+#include "salad/memory.h"
 #include "salad/string.h"
 #include "salad/types.h"
 
@@ -47,7 +48,10 @@ char *sld_multiply_string(char *string, int factor, char separator)
 {
   int i;
   char separator_string[2];
-  char *concat_string = (char *)malloc(strlen(string) * factor + factor); /* "+ factor" for the separator */
+  char *concat_string = NULL;
+
+  /* "+ factor + 1" for the separator and terminator */
+  concat_string = (char *)malloc(strlen(string) * factor + factor + 1);
 
   if(concat_string == NULL)
   {
@@ -55,6 +59,7 @@ char *sld_multiply_string(char *string, int factor, char separator)
     exit(EXIT_FAILURE);
   }
 
+  *concat_string = '\0';
   separator_string[0] = separator;
   separator_string[1] = '\0';
 
@@ -65,6 +70,8 @@ char *sld_multiply_string(char *string, int factor, char separator)
       break;
     strcat(concat_string, separator_string);
   }
+
+  sld_pool_add(concat_string);
 
   return concat_string;
 }

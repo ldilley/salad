@@ -19,23 +19,26 @@
  */
 
 #include <stdlib.h> /* calloc(), realloc() */
-#include <string.h> /* memset() */
 
 /* Local includes */
-/*#include "salad/memory.h"*/
+#include "salad/memory.h"
 #include "salad/types.h"
 
 static SLD_BOOL sld_is_initialized = SLD_FALSE;
+static SLD_ULINT sld_pool_capacity = 0;
 static void **sld_object_pool = NULL;
 
 void sld_init_pool(SLD_USINT initial_size)
 {
   if(!sld_is_initialized)
   {
-    sld_is_initialized = SLD_TRUE;
     sld_object_pool = calloc(initial_size, sizeof(void *));
+    if(sld_object_pool != NULL)
+    {
+      sld_is_initialized = SLD_TRUE;
+      sld_pool_capacity = initial_size;
+    }
   }
-
   return;
 }
 
@@ -45,49 +48,58 @@ SLD_BOOL sld_pool_initialized()
 
   if(sld_is_initialized && sld_object_pool != NULL)
     ret_value = SLD_TRUE;
-
   return ret_value;
 }
 
 SLD_ULINT sld_pool_size()
 {
-  SLD_ULINT size = 0;
-
-  if(sld_pool_initialized())
-    size = sizeof(sld_object_pool) * sizeof(void *);
-
-  return size;
+  return sld_pool_capacity;
 }
 
-SLD_SSINT sld_resize_pool(SLD_ULINT new_size)
+SLD_SSINT sld_resize_pool(SLD_ULINT grow_amount)
 {
   void **new_object_pool = NULL;
   SLD_SSINT ret_value = -1;
+  int i;
 
-  if(sld_pool_initialized() && sld_pool_size() < new_size)
+  if(sld_pool_initialized())
   {
-    new_object_pool = realloc(sld_object_pool, new_size * sizeof(void *));
+    new_object_pool = realloc(sld_object_pool, (sld_pool_capacity + grow_amount) * sizeof(void *));
     if(new_object_pool != NULL)
     {
-      memset(new_object_pool, 0, sizeof(void *) * new_size);
+      /* Don't use memset() since the initialized data may not be NULL. */
+      /*memset(new_object_pool, 0, sizeof(void *) * grow_amount);*/
+      for(i = sld_pool_capacity; i < sld_pool_capacity + grow_amount; i++)
+        new_object_pool[i] = NULL;
+      sld_pool_capacity += grow_amount;
       sld_object_pool = new_object_pool;
       ret_value = 0;
     }
   }
-
   return ret_value;
 }
 
 SLD_ULINT sld_pool_add(void *ptr)
 {
-  SLD_ULINT object_counter = 0;
+  int i;
+
+  if(!sld_pool_initialized())
+    sld_init_pool(POOL_GROW_AMOUNT);
 
   if(sld_pool_initialized())
   {
-    /* Insert object into pool if there is a free slot detected, else resize it by POOL_GROW_AMOUNT */
+    if(sld_objects_in_pool() == sld_pool_size())
+      sld_resize_pool(POOL_GROW_AMOUNT);
+    for(i = 0; i < sld_pool_size(); i++)
+    {
+      if(sld_object_pool[i] == NULL)
+      {
+        sld_object_pool[i] = ptr;
+        break;
+      }
+    }
   }
-
-  return object_counter;
+  return sld_objects_in_pool();
 }
 
 SLD_ULINT sld_objects_in_pool()
@@ -103,7 +115,6 @@ SLD_ULINT sld_objects_in_pool()
         object_count++;
     }
   }
-
   return object_count;
 }
 
@@ -125,7 +136,6 @@ SLD_ULINT sld_free_pool()
       }
     }
   }
-
   return object_count;
 }
 
@@ -137,7 +147,7 @@ void sld_nuke_pool()
     free(sld_object_pool);
     sld_object_pool = NULL;
     sld_is_initialized = SLD_FALSE;
+    sld_pool_capacity = 0;
   }
-
   return;
 }
