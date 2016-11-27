@@ -42,7 +42,7 @@ void sld_start()
   for(;;)
   {
     /* Prints a space-separated string multiplied by itself 3 times. */
-    heap_string = sld_multiply_string("hello!", 3, ' ');
+    heap_string = sld_multiply_string(sld_capitalize("hello!"), 3, ' ');
     puts(heap_string);
 
     for(i = 0; i < 32; i++)
