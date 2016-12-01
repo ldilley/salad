@@ -23,9 +23,9 @@
 
 #include "salad/types.h"
 
-SLD_SSINT connect(char *host, SLD_USINT port);
-SLD_SSINT disconnect();
-long receive(char *packet);
-long send(char *packet);
+SLD_SSINT sld_network_connect(char *host, SLD_USINT port);
+SLD_SSINT sld_network_disconnect();
+SLD_ULINT sld_network_receive(char *packet);
+SLD_ULINT sld_network_send(char *packet);
 
 #endif /* NETWORK_H */

@@ -18,30 +18,42 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#include <string.h>    /* strlen() */
-#include <time.h>      /* time_t, tm, asctime(), localtime(), strftime(), time() */
+/* This is a test program that makes use of libsalad for demonstrational purposes. */
+
+#include <stdio.h>  /* printf() */
 
 /* Local includes */
-#include "salad/time.h"
+#include "salad/memory.h"
+#include "salad/vector.h"
 
-time_t sld_time_epoch_seconds()
+int main()
 {
-  return time(NULL);
-}
+  int i;
+  sld_vector v;
 
-char *sld_time_pretty_timestamp()
-{
-  char *timestamp;
-  time_t rawtime;
-  struct tm *timedata;
+  sld_vector_init(&v);
+  sld_vector_add(&v, "Foo");
+  sld_vector_add(&v, "Bar");
 
-  time(&rawtime);
-  timedata = localtime(&rawtime);
-  timestamp = asctime(timedata);
+  for (i = 0; i < sld_vector_objects(&v); i++)
+    printf("%s ", (char *)sld_vector_get(&v, i));
+  printf("\n");
 
-  /* Remove appended newline */
-  if(timestamp[strlen(timestamp) - 1] == '\n')
-    timestamp[strlen(timestamp) - 1] = '\0';
+  sld_vector_delete(&v, 0);
+  sld_vector_delete(&v, 1);
 
-  return timestamp;
+  sld_vector_set(&v, 0, "Hello");
+  sld_vector_add(&v, "world!");
+  sld_vector_add(&v, "Pop me!");
+
+  printf("Popped: %s\n", (char *)sld_vector_pop(&v));
+
+  for (i = 0; i < sld_vector_objects(&v); i++)
+    printf("%s ", (char *)sld_vector_get(&v, i));
+  printf("\n");
+
+  sld_vector_free(&v);
+  sld_memory_pool_nuke();
+
+  return 0;
 }

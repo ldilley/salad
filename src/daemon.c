@@ -30,7 +30,7 @@
 /* Local includes */
 #include "salad/daemon.h"
 
-void sld_daemonize(char *pid_file_name, char *runas_user, char *runas_group)
+void sld_daemon_daemonize(char *pid_file_name, char *runas_user, char *runas_group)
 {
   struct passwd *pwent;
   struct group *grpent;
@@ -40,7 +40,7 @@ void sld_daemonize(char *pid_file_name, char *runas_user, char *runas_group)
   {
     if(pid == 0)
     {
-      sld_write_pid_file(pid_file_name);
+      sld_daemon_write_pid_file(pid_file_name);
       if(runas_user != NULL)
       {
         if((pwent = getpwnam(runas_user)) == NULL)
@@ -65,7 +65,7 @@ void sld_daemonize(char *pid_file_name, char *runas_user, char *runas_group)
           setgid(grpent->gr_gid);
         }
       }
-      sld_start();
+      sld_daemon_start();
     }
   }
   else
@@ -77,7 +77,7 @@ void sld_daemonize(char *pid_file_name, char *runas_user, char *runas_group)
 }
 
 /* Writes a pid file to disk and returns the PID written to it */
-pid_t sld_write_pid_file(char *pid_file_name)
+pid_t sld_daemon_write_pid_file(char *pid_file_name)
 {
   FILE *pid_file;
 
