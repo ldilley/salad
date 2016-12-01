@@ -23,17 +23,17 @@
 
 #include "salad/types.h"
 
-char *sld_allocate_string(char *string);
-char *sld_chomp(char *string);
-char *sld_chop(char *string);
-char *sld_trim_leading(char *string);
-char *sld_trim_trailing(char *string);
-char *sld_trim(char *trim);
+char *sld_string_allocate(char *string);
+char *sld_string_chomp(char *string);
+char *sld_string_chop(char *string);
+char *sld_string_trim_leading(char *string);
+char *sld_string_trim_trailing(char *string);
+char *sld_string_trim(char *trim);
 SLD_BOOL sld_string_contains_character(char *string, char character);
-char *sld_capitalize(char *string);
-char *sld_uncapitalize(char *string);
-int sld_casecmp(char *string1, char *string2);
-char *sld_multiply_string(char *string, int factor, char separator);
-char *sld_reverse(char *string);
+char *sld_string_capitalize(char *string);
+char *sld_string_uncapitalize(char *string);
+int sld_string_casecmp(char *string1, char *string2);
+char *sld_string_multiply(char *string, int factor, char separator);
+char *sld_string_reverse(char *string);
 
 #endif /* STRING_H */

@@ -23,8 +23,8 @@
 
 #include <sys/types.h>
 
-void sld_daemonize(char *pid_file_name, char *runas_user, char *runas_group);
-void sld_start();
-pid_t sld_write_pid_file(char *pid_file_name);
+void sld_daemon_daemonize(char *pid_file_name, char *runas_user, char *runas_group);
+void sld_daemon_start();
+pid_t sld_daemon_write_pid_file(char *pid_file_name);
 
 #endif /* DAEMON_H */

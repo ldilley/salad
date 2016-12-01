@@ -18,30 +18,33 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#include <string.h>    /* strlen() */
-#include <time.h>      /* time_t, tm, asctime(), localtime(), strftime(), time() */
+#ifndef VECTOR_H
+#define VECTOR_H
 
-/* Local includes */
-#include "salad/time.h"
+#include "salad/types.h"
 
-time_t sld_time_epoch_seconds()
+#define INITIAL_CAPACITY 16
+#define RESIZE_FACTOR 2
+
+typedef struct sld_vector
 {
-  return time(NULL);
-}
+  void **objects;
+  int capacity;
+  int object_count;
+} sld_vector;
 
-char *sld_time_pretty_timestamp()
-{
-  char *timestamp;
-  time_t rawtime;
-  struct tm *timedata;
+void sld_vector_init(sld_vector *v);
+void sld_vector_init_size(sld_vector *v, int size);
+SLD_UINT sld_vector_objects(sld_vector *v);
+SLD_UINT sld_vector_size(sld_vector *v);
+void sld_vector_resize(sld_vector *v, int new_size);
+void sld_vector_add(sld_vector *v, void *object);
+void *sld_vector_get(sld_vector *v, int index);
+void sld_vector_set(sld_vector *v, int index, void *object);
+void *sld_vector_pop(sld_vector *v);
+void sld_vector_push(sld_vector *v, void *object);
+void sld_vector_delete(sld_vector *v, int index);
+void sld_vector_clear(sld_vector *v);
+void sld_vector_free(sld_vector *v);
 
-  time(&rawtime);
-  timedata = localtime(&rawtime);
-  timestamp = asctime(timedata);
-
-  /* Remove appended newline */
-  if(timestamp[strlen(timestamp) - 1] == '\n')
-    timestamp[strlen(timestamp) - 1] = '\0';
-
-  return timestamp;
-}
+#endif /* VECTOR_H */

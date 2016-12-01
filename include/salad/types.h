@@ -27,6 +27,8 @@
 typedef unsigned char SLD_BYTE;
 typedef signed short int SLD_SSINT;
 typedef unsigned short int SLD_USINT;
+typedef signed int SLD_SINT;
+typedef unsigned int SLD_UINT;
 typedef signed long int SLD_SLINT;
 typedef unsigned long int SLD_ULINT;
 typedef SLD_USINT SLD_BOOL;

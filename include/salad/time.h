@@ -25,7 +25,7 @@
 
 struct tm *timedata;
 
-time_t sld_seconds_since_epoch();
-char *sld_pretty_timestamp();
+time_t sld_time_epoch_seconds();
+char *sld_time_pretty_timestamp();
 
 #endif /* TIME_H */

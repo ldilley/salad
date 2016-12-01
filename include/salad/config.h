@@ -18,30 +18,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#include <string.h>    /* strlen() */
-#include <time.h>      /* time_t, tm, asctime(), localtime(), strftime(), time() */
+#ifndef CONFIG_H
+#define CONFIG_H
 
-/* Local includes */
-#include "salad/time.h"
+#define EXIT_ON_FAILURE
 
-time_t sld_time_epoch_seconds()
-{
-  return time(NULL);
-}
-
-char *sld_time_pretty_timestamp()
-{
-  char *timestamp;
-  time_t rawtime;
-  struct tm *timedata;
-
-  time(&rawtime);
-  timedata = localtime(&rawtime);
-  timestamp = asctime(timedata);
-
-  /* Remove appended newline */
-  if(timestamp[strlen(timestamp) - 1] == '\n')
-    timestamp[strlen(timestamp) - 1] = '\0';
-
-  return timestamp;
-}
+#endif /* CONFIG_H */
