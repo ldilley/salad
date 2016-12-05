@@ -18,31 +18,30 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef VECTOR_H
-#define VECTOR_H
+#ifndef LIST_H
+#define LIST_H
 
 #include "salad/types.h"
 
-#define INITIAL_CAPACITY 16
-#define RESIZE_FACTOR 2
-
-typedef struct sld_vector
+typedef struct sld_node
 {
-  void **objects;
-  int capacity;
-  int object_count;
-} sld_vector;
+  void *object;
+  struct sld_node *next;
+  struct sld_node *previous;
+} sld_node;
 
-void sld_vector_init(sld_vector *v);
-void sld_vector_init_size(sld_vector *v, int size);
-SLD_UINT sld_vector_objects(sld_vector *v);
-SLD_UINT sld_vector_size(sld_vector *v);
-void sld_vector_resize(sld_vector *v, int new_size);
-void sld_vector_add(sld_vector *v, void *object);
-void *sld_vector_get(sld_vector *v, int index);
-void sld_vector_set(sld_vector *v, int index, void *object);
-void *sld_vector_pop(sld_vector *v);
-void sld_vector_delete(sld_vector *v, int index);
-void sld_vector_free(sld_vector *v);
+typedef struct sld_list
+{
+  SLD_UINT size;
+  struct sld_node *head;
+} sld_list;
 
-#endif /* VECTOR_H */
+void sld_list_init(struct sld_list *list);
+SLD_UINT sld_list_size(struct sld_list *list);
+void sld_list_add(struct sld_list *list, void *object);
+void sld_list_delete(struct sld_list *list, SLD_UINT index);
+void *sld_list_get(struct sld_list *list, SLD_UINT index);
+void *sld_list_pop(struct sld_list *list);
+void sld_list_free(struct sld_list *list);
+
+#endif /* LIST_H */

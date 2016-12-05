@@ -20,7 +20,7 @@
 
 /* This is a test program that makes use of libsalad for demonstrational purposes. */
 
-#include <stdio.h>  /* printf() */
+#include <stdio.h>  /* printf(), puts() */
 
 /* Local includes */
 #include "salad/memory.h"
@@ -28,29 +28,25 @@
 
 int main()
 {
-  int i;
   sld_vector v;
+  int i;
 
   sld_vector_init(&v);
-  sld_vector_add(&v, "Foo");
-  sld_vector_add(&v, "Bar");
 
-  for (i = 0; i < sld_vector_objects(&v); i++)
-    printf("%s ", (char *)sld_vector_get(&v, i));
-  printf("\n");
+  printf("Initial vector object count: %d\n", sld_vector_objects(&v));
 
-  sld_vector_delete(&v, 0);
-  sld_vector_delete(&v, 1);
-
-  sld_vector_set(&v, 0, "Hello");
+  sld_vector_add(&v, "Hello");
   sld_vector_add(&v, "world!");
   sld_vector_add(&v, "Pop me!");
 
+  printf("Vector object count after adding objects: %d\n", sld_vector_objects(&v));  
   printf("Popped: %s\n", (char *)sld_vector_pop(&v));
+  printf("Vector object count after pop: %d\n", sld_vector_objects(&v));
 
+  puts("Printing vector contents...");
   for (i = 0; i < sld_vector_objects(&v); i++)
     printf("%s ", (char *)sld_vector_get(&v, i));
-  printf("\n");
+  puts("");
 
   sld_vector_free(&v);
   sld_memory_pool_nuke();
