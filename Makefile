@@ -12,18 +12,21 @@ LDFLAGS = -shared
 
 # Files
 HEADERS = include/salad/config.h \
+          include/salad/list.h \
           include/salad/memory.h \
           include/salad/network.h \
           include/salad/string.h \
           include/salad/time.h \
           include/salad/types.h \
           include/salad/vector.h
-SOURCES = src/memory.c \
+SOURCES = src/list.c \
+          src/memory.c \
           src/network.c \
           src/string.c \
           src/time.c \
           src/vector.c
-OBJECTS = src/memory.o \
+OBJECTS = src/list.o \
+          src/memory.o \
           src/network.o \
           src/string.o \
           src/time.o \

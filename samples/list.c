@@ -18,31 +18,38 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef VECTOR_H
-#define VECTOR_H
+/* This is a test program that makes use of libsalad for demonstrational purposes. */
 
-#include "salad/types.h"
+#include <stdio.h>  /* printf(), puts() */
 
-#define INITIAL_CAPACITY 16
-#define RESIZE_FACTOR 2
+/* Local includes */
+#include "salad/list.h"
+#include "salad/memory.h"
 
-typedef struct sld_vector
+int main()
 {
-  void **objects;
-  int capacity;
-  int object_count;
-} sld_vector;
+  sld_list list;
+  int i;
 
-void sld_vector_init(sld_vector *v);
-void sld_vector_init_size(sld_vector *v, int size);
-SLD_UINT sld_vector_objects(sld_vector *v);
-SLD_UINT sld_vector_size(sld_vector *v);
-void sld_vector_resize(sld_vector *v, int new_size);
-void sld_vector_add(sld_vector *v, void *object);
-void *sld_vector_get(sld_vector *v, int index);
-void sld_vector_set(sld_vector *v, int index, void *object);
-void *sld_vector_pop(sld_vector *v);
-void sld_vector_delete(sld_vector *v, int index);
-void sld_vector_free(sld_vector *v);
+  sld_list_init(&list);
 
-#endif /* VECTOR_H */
+  printf("Initial list size: %d\n", sld_list_size(&list));
+
+  sld_list_add(&list, "Hello");
+  sld_list_add(&list, "world!");
+  sld_list_add(&list, "Pop me!");
+
+  printf("List size after adding objects: %d\n", sld_list_size(&list));
+  printf("Popped: %s\n", (char *)sld_list_pop(&list));
+  printf("List size after pop: %d\n", sld_list_size(&list));
+
+  puts("Printing list contents...");
+  for(i = 0; i < sld_list_size(&list); i++)
+    printf("%s ", (char *)sld_list_get(&list, i));
+  puts("");
+
+  sld_list_free(&list);
+  sld_memory_pool_nuke();
+
+  return 0;
+}
