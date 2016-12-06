@@ -32,7 +32,7 @@ static SLD_BOOL sld_memory_pool_is_initialized = SLD_FALSE;
 static SLD_ULINT sld_memory_pool_capacity = 0;
 static void **sld_memory_pool = NULL;
 
-void sld_memory_pool_init(SLD_USINT initial_size)
+SLD_SSINT sld_memory_pool_init(SLD_USINT initial_size)
 {
   if(!sld_memory_pool_is_initialized)
   {
@@ -48,18 +48,20 @@ void sld_memory_pool_init(SLD_USINT initial_size)
 #ifdef EXIT_ON_FAILURE
       exit(EXIT_FAILURE);
 #endif
+      return RETURN_FAILURE;
     }
   }
-  return;
+  return RETURN_SUCCESS;
 }
 
 SLD_BOOL sld_memory_pool_initialized()
 {
-  SLD_BOOL ret_value = SLD_FALSE;
+  SLD_BOOL return_value = SLD_FALSE;
 
   if(sld_memory_pool_is_initialized && sld_memory_pool != NULL)
-    ret_value = SLD_TRUE;
-  return ret_value;
+    return_value = SLD_TRUE;
+
+  return return_value;
 }
 
 SLD_ULINT sld_memory_pool_size()
@@ -70,7 +72,6 @@ SLD_ULINT sld_memory_pool_size()
 SLD_SSINT sld_memory_pool_resize(SLD_ULINT grow_amount)
 {
   void **new_object_pool = NULL;
-  SLD_SSINT ret_value = -1;
   int i;
 
   if(sld_memory_pool_initialized())
@@ -84,7 +85,6 @@ SLD_SSINT sld_memory_pool_resize(SLD_ULINT grow_amount)
         new_object_pool[i] = NULL;
       sld_memory_pool_capacity += grow_amount;
       sld_memory_pool = new_object_pool;
-      ret_value = 0;
     }
     else
     {
@@ -92,9 +92,10 @@ SLD_SSINT sld_memory_pool_resize(SLD_ULINT grow_amount)
 #ifdef EXIT_ON_FAILURE
       exit(EXIT_FAILURE);
 #endif
+      return RETURN_FAILURE;
     }
   }
-  return ret_value;
+  return RETURN_SUCCESS;
 }
 
 SLD_ULINT sld_memory_pool_add(void *ptr)

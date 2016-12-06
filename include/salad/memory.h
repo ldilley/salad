@@ -26,7 +26,7 @@
 /* Amount to grow object pool dynamically during add if no free slots remaining */
 #define POOL_GROW_AMOUNT 16
 
-void sld_memory_pool_init(SLD_USINT initial_size);
+SLD_SSINT sld_memory_pool_init(SLD_USINT initial_size);
 SLD_BOOL sld_memory_pool_initialized();
 SLD_ULINT sld_memory_pool_size();
 SLD_SSINT sld_memory_pool_resize(SLD_ULINT new_size);

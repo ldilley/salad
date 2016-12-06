@@ -18,31 +18,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef VECTOR_H
-#define VECTOR_H
+#ifndef MAP_H
+#define MAP_H
 
-#include "salad/types.h"
-
-#define INITIAL_CAPACITY 16
-#define RESIZE_FACTOR 2
-
-typedef struct sld_vector
-{
-  void **objects;
-  int capacity;
-  int object_count;
-} sld_vector;
-
-SLD_SSINT sld_vector_init(sld_vector *vector);
-SLD_SSINT sld_vector_init_size(sld_vector *vector, int size);
-SLD_UINT sld_vector_objects(sld_vector *vector);
-SLD_UINT sld_vector_size(sld_vector *vector);
-SLD_SSINT sld_vector_resize(sld_vector *vector, int new_size);
-SLD_SSINT sld_vector_add(sld_vector *vector, void *object);
-void *sld_vector_get(sld_vector *vector, int index);
-void sld_vector_set(sld_vector *vector, int index, void *object);
-void *sld_vector_pop(sld_vector *vector);
-void sld_vector_delete(sld_vector *vector, int index);
-void sld_vector_free(sld_vector *vector);
-
-#endif /* VECTOR_H */
+#endif /* MAP_H */
