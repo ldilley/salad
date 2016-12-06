@@ -28,27 +28,27 @@
 
 int main()
 {
-  sld_vector v;
+  sld_vector vector;
   int i;
 
-  sld_vector_init(&v);
+  sld_vector_init(&vector);
 
-  printf("Initial vector object count: %d\n", sld_vector_objects(&v));
+  printf("Initial vector object count: %d\n", sld_vector_objects(&vector));
 
-  sld_vector_add(&v, "Hello");
-  sld_vector_add(&v, "world!");
-  sld_vector_add(&v, "Pop me!");
+  sld_vector_add(&vector, "Hello");
+  sld_vector_add(&vector, "world!");
+  sld_vector_add(&vector, "Pop me!");
 
-  printf("Vector object count after adding objects: %d\n", sld_vector_objects(&v));  
-  printf("Popped: %s\n", (char *)sld_vector_pop(&v));
-  printf("Vector object count after pop: %d\n", sld_vector_objects(&v));
+  printf("Vector object count after adding objects: %d\n", sld_vector_objects(&vector));  
+  printf("Popped: %s\n", (char *)sld_vector_pop(&vector));
+  printf("Vector object count after pop: %d\n", sld_vector_objects(&vector));
 
   puts("Printing vector contents...");
-  for (i = 0; i < sld_vector_objects(&v); i++)
-    printf("%s ", (char *)sld_vector_get(&v, i));
+  for (i = 0; i < sld_vector_objects(&vector); i++)
+    printf("%s ", (char *)sld_vector_get(&vector, i));
   puts("");
 
-  sld_vector_free(&v);
+  sld_vector_free(&vector);
   sld_memory_pool_nuke();
 
   return 0;

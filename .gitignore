@@ -10,4 +10,8 @@
 logs/
 samples/daemon
 samples/list
+samples/map
+samples/queue
+samples/stack
+samples/tree
 samples/vector

@@ -24,6 +24,9 @@
 #define SLD_FALSE 0
 #define SLD_TRUE !(SLD_FALSE)
 
+#define RETURN_SUCCESS 0
+#define RETURN_FAILURE -1
+
 typedef unsigned char SLD_BYTE;
 typedef signed short int SLD_SSINT;
 typedef unsigned short int SLD_USINT;

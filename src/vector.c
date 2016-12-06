@@ -29,57 +29,59 @@
 #include "salad/types.h"
 #include "salad/vector.h"
 
-void sld_vector_init(sld_vector *v)
+SLD_SSINT sld_vector_init(sld_vector *vector)
 {
-  v->capacity = INITIAL_CAPACITY;
-  v->object_count = 0;
-  v->objects = malloc(sizeof(void *) * v->capacity);
+  vector->capacity = INITIAL_CAPACITY;
+  vector->object_count = 0;
+  vector->objects = malloc(sizeof(void *) * vector->capacity);
 
-  if(v->objects == NULL)
+  if(vector->objects == NULL)
   {
     printf("Unable to allocate memory for vector: %s\n", strerror(errno));
 #ifdef EXIT_ON_FAILURE
     exit(EXIT_FAILURE);
 #endif
+    return RETURN_FAILURE;
   }
 
-  return;
+  return RETURN_SUCCESS;
 }
 
-void sld_vector_init_size(sld_vector *v, int size)
+SLD_SSINT sld_vector_init_size(sld_vector *vector, int size)
 {
-  v->capacity = size;
-  v->object_count = 0;
-  v->objects = malloc(sizeof(void *) * v->capacity);
+  vector->capacity = size;
+  vector->object_count = 0;
+  vector->objects = malloc(sizeof(void *) * vector->capacity);
 
-  if(v->objects == NULL)
+  if(vector->objects == NULL)
   {
     printf("Unable to allocate memory for vector: %s\n", strerror(errno));
 #ifdef EXIT_ON_FAILURE
     exit(EXIT_FAILURE);
 #endif
+    return RETURN_FAILURE;
   }
 
-  return;
+  return RETURN_SUCCESS;
 }
 
-SLD_UINT sld_vector_objects(sld_vector *v)
+SLD_UINT sld_vector_objects(sld_vector *vector)
 {
-  return v->object_count;
+  return vector->object_count;
 }
 
-SLD_UINT sld_vector_size(sld_vector *v)
+SLD_UINT sld_vector_size(sld_vector *vector)
 {
-  return v->capacity;
+  return vector->capacity;
 }
 
-void sld_vector_resize(sld_vector *v, int new_size)
+SLD_SSINT sld_vector_resize(sld_vector *vector, int new_size)
 {
-  void **objects = realloc(v->objects, sizeof(void *) * new_size);
+  void **objects = realloc(vector->objects, sizeof(void *) * new_size);
   if(objects)
   {
-    v->objects = objects;
-    v->capacity = new_size;
+    vector->objects = objects;
+    vector->capacity = new_size;
   }
   else
   {
@@ -87,68 +89,80 @@ void sld_vector_resize(sld_vector *v, int new_size)
 #ifdef EXIT_ON_FAILURE
     exit(EXIT_FAILURE);
 #endif
+    return RETURN_FAILURE;
   }
 
-  return;
+  return RETURN_SUCCESS;
 }
 
-void sld_vector_add(sld_vector *v, void *object)
+SLD_SSINT sld_vector_add(sld_vector *vector, void *object)
 {
-  if(v->object_count == v->capacity)
-    sld_vector_resize(v, v->capacity * RESIZE_FACTOR);
-  v->objects[v->object_count++] = object;
-  return;
+  SLD_SSINT return_value = RETURN_SUCCESS;
+  SLD_UINT old_object_count = 0;
+
+  if(vector->object_count == vector->capacity)
+    return_value = sld_vector_resize(vector, vector->capacity * RESIZE_FACTOR);
+
+  old_object_count = sld_vector_objects(vector);
+  if(return_value == RETURN_SUCCESS)
+    vector->objects[vector->object_count++] = object;
+
+  /* Object was not successfully added */
+  if(sld_vector_objects(vector) == old_object_count)
+    return_value = RETURN_FAILURE;
+
+  return return_value;
 }
 
-void *sld_vector_get(sld_vector *v, int index)
+void *sld_vector_get(sld_vector *vector, int index)
 {
-  if(index >= 0 && index < v->object_count)
-    return v->objects[index];
+  if(index >= 0 && index < vector->object_count)
+    return vector->objects[index];
   return NULL;
 }
 
-void sld_vector_set(sld_vector *v, int index, void *object)
+void sld_vector_set(sld_vector *vector, int index, void *object)
 {
-  if(index >= 0 && index < v->object_count)
-    v->objects[index] = object;
+  if(index >= 0 && index < vector->object_count)
+    vector->objects[index] = object;
   return;
 }
 
-void *sld_vector_pop(sld_vector *v)
+void *sld_vector_pop(sld_vector *vector)
 {
   void *object = NULL;
 
-  object = sld_vector_get(v, v->object_count - 1);
-  sld_vector_delete(v, v->object_count - 1);
+  object = sld_vector_get(vector, vector->object_count - 1);
+  sld_vector_delete(vector, vector->object_count - 1);
 
   return object;
 }
 
-void sld_vector_delete(sld_vector *v, int index)
+void sld_vector_delete(sld_vector *vector, int index)
 {
   int i;
 
-  if(index < 0 || index >= v->object_count)
+  if(index < 0 || index >= vector->object_count)
     return;
 
-  v->objects[index] = NULL;
+  vector->objects[index] = NULL;
 
-  for(i = index; i < v->object_count - 1; i++)
+  for(i = index; i < vector->object_count - 1; i++)
   {
-    v->objects[i] = v->objects[i + 1];
-    v->objects[i + 1] = NULL;
+    vector->objects[i] = vector->objects[i + 1];
+    vector->objects[i + 1] = NULL;
   }
 
-  v->object_count--;
+  vector->object_count--;
 
-  if(v->object_count > 0 && v->object_count == v->capacity / (RESIZE_FACTOR * 2))
-    sld_vector_resize(v, v->capacity / RESIZE_FACTOR);
+  if(vector->object_count > 0 && vector->object_count == vector->capacity / (RESIZE_FACTOR * 2))
+    sld_vector_resize(vector, vector->capacity / RESIZE_FACTOR);
 
   return;
 }
 
-void sld_vector_free(sld_vector *v)
+void sld_vector_free(sld_vector *vector)
 {
-  free(v->objects);
+  free(vector->objects);
   return;
 }

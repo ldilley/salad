@@ -36,9 +36,9 @@ typedef struct sld_list
   struct sld_node *head;
 } sld_list;
 
-void sld_list_init(struct sld_list *list);
+SLD_SSINT sld_list_init(struct sld_list *list);
 SLD_UINT sld_list_size(struct sld_list *list);
-void sld_list_add(struct sld_list *list, void *object);
+SLD_SSINT sld_list_add(struct sld_list *list, void *object);
 void sld_list_delete(struct sld_list *list, SLD_UINT index);
 void *sld_list_get(struct sld_list *list, SLD_UINT index);
 void *sld_list_pop(struct sld_list *list);

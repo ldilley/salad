@@ -28,7 +28,7 @@
 #include "salad/list.h"
 #include "salad/types.h"
 
-void sld_list_init(struct sld_list *list)
+SLD_SSINT sld_list_init(struct sld_list *list)
 {
   list->size = 0;
   list->head = (struct sld_node *)malloc(sizeof(struct sld_node));
@@ -39,6 +39,7 @@ void sld_list_init(struct sld_list *list)
 #ifdef EXIT_ON_FAILURE
     exit(EXIT_FAILURE);
 #endif
+    return RETURN_FAILURE;
   }
   else
   {
@@ -47,7 +48,7 @@ void sld_list_init(struct sld_list *list)
     list->head->previous = NULL;
   }
 
-  return;
+  return RETURN_SUCCESS;
 }
 
 SLD_UINT sld_list_size(struct sld_list *list)
@@ -55,7 +56,7 @@ SLD_UINT sld_list_size(struct sld_list *list)
   return list->size;
 }
 
-void sld_list_add(struct sld_list *list, void *object)
+SLD_SSINT sld_list_add(struct sld_list *list, void *object)
 {
   struct sld_node *current = NULL;
   struct sld_node *new = NULL;
@@ -81,7 +82,7 @@ void sld_list_add(struct sld_list *list, void *object)
 #ifdef EXIT_ON_FAILURE
           exit(EXIT_FAILURE);
 #endif
-          break;
+          return RETURN_FAILURE;
         }
         else
         {
@@ -97,7 +98,7 @@ void sld_list_add(struct sld_list *list, void *object)
     }
   }
 
-  return;
+  return RETURN_SUCCESS;
 }
 
 void sld_list_delete(struct sld_list *list, SLD_UINT index)
@@ -128,6 +129,8 @@ void sld_list_delete(struct sld_list *list, SLD_UINT index)
           current->next->previous = current->previous;
           current->previous->next = current->next;
         }
+        else if(sld_list_size(list) == 1 && current->next == NULL) /* Only the head remains */
+          current->previous = NULL;       /* Filler assignment */
         else
           current->previous->next = NULL; /* End of the line... Set previous node to NULL */
       }
@@ -138,7 +141,6 @@ void sld_list_delete(struct sld_list *list, SLD_UINT index)
     i++;
     current = current->next;
   }
-
   return;
 }
 
@@ -148,7 +150,7 @@ void *sld_list_get(struct sld_list *list, SLD_UINT index)
   void *object = NULL;
   int i = 0;
 
-  if(index > sld_list_size(list))
+  if(index < 0 || index > sld_list_size(list))
     return NULL;
 
   current = list->head;

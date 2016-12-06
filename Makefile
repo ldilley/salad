@@ -13,23 +13,41 @@ LDFLAGS = -shared
 # Files
 HEADERS = include/salad/config.h \
           include/salad/list.h \
+          include/salad/map.h \
           include/salad/memory.h \
           include/salad/network.h \
+          include/salad/queue.h \
+          include/salad/search.h \
+          include/salad/sort.h \
+          include/salad/stack.h \
           include/salad/string.h \
           include/salad/time.h \
+          include/salad/tree.h \
           include/salad/types.h \
           include/salad/vector.h
 SOURCES = src/list.c \
+          src/map.c \
           src/memory.c \
           src/network.c \
+          src/queue.c \
+          src/search.c \
+          src/sort.c \
+          src/stack.c \
           src/string.c \
           src/time.c \
+          src/tree.c \
           src/vector.c
 OBJECTS = src/list.o \
+          src/map.o \
           src/memory.o \
           src/network.o \
+          src/queue.o \
+          src/search.o \
+          src/sort.o \
+          src/stack.o \
           src/string.o \
           src/time.o \
+          src/tree.o \
           src/vector.o
 
 TARGET_LIB1 = libsalad.so
