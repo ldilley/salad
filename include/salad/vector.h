@@ -42,7 +42,7 @@ SLD_SSINT sld_vector_add(sld_vector *vector, void *object);
 void *sld_vector_get(sld_vector *vector, int index);
 void sld_vector_set(sld_vector *vector, int index, void *object);
 void *sld_vector_pop(sld_vector *vector);
-void sld_vector_delete(sld_vector *vector, int index);
+void sld_vector_delete(sld_vector *vector, SLD_UINT index);
 void sld_vector_free(sld_vector *vector);
 
 #endif /* VECTOR_H */

@@ -21,6 +21,4 @@
 #ifndef TREE_H
 #define TREE_H
 
-#define EXIT_ON_FAILURE
-
 #endif /* TREE_H */
