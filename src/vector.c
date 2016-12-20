@@ -138,7 +138,7 @@ void *sld_vector_pop(sld_vector *vector)
   return object;
 }
 
-void sld_vector_delete(sld_vector *vector, int index)
+void sld_vector_delete(sld_vector *vector, SLD_UINT index)
 {
   int i;
 
