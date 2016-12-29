@@ -18,5 +18,142 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+#include <errno.h>  /* errno */
+#include <stdio.h>  /* printf(), puts() */
+#include <stdlib.h> /* EXIT_FAILURE, exit(), free(), malloc() */
+#include <string.h> /* strcmp(), strerror() */
+
 /* Local includes */
+#include "salad/config.h"
 #include "salad/map.h"
+#include "salad/types.h"
+#include "salad/vector.h"
+
+SLD_SSINT sld_map_init(struct sld_map *map)
+{
+  SLD_SSINT return_value = RETURN_FAILURE;
+
+  map->keys = (struct sld_vector *)malloc(sizeof(struct sld_vector));
+  if(map->keys == NULL)
+  {
+    printf("Unable to allocate memory for map: %s\n", strerror(errno));
+#ifdef EXIT_ON_FAILURE
+    exit(EXIT_FAILURE);
+#endif
+    return RETURN_FAILURE;
+  }
+
+  return_value = sld_vector_init(map->keys);
+  if(return_value == RETURN_FAILURE)
+  {
+    puts("Unable to initialize map.");
+#ifdef EXIT_ON_FAILURE
+    exit(EXIT_FAILURE);
+#endif
+    return RETURN_FAILURE;
+  }
+
+  map->values = (struct sld_vector *)malloc(sizeof(struct sld_vector));
+  if(map->values == NULL)
+  {
+    printf("Unable to allocate memory for map: %s\n", strerror(errno));
+#ifdef EXIT_ON_FAILURE
+    exit(EXIT_FAILURE);
+#endif
+    return RETURN_FAILURE;
+  }
+
+  return_value = sld_vector_init(map->values);
+  if(return_value == RETURN_FAILURE)
+  {
+    puts("Unable to allocate memory for map.");
+#ifdef EXIT_ON_FAILURE
+    exit(EXIT_FAILURE);
+#endif
+    return RETURN_FAILURE;
+  }
+
+  return return_value;
+}
+
+SLD_UINT sld_map_size(struct sld_map *map)
+{
+   return sld_vector_objects(map->keys);
+}
+
+SLD_SSINT sld_map_add(struct sld_map *map, char *key, void *value)
+{
+  SLD_SSINT return_value = RETURN_FAILURE;
+
+  /* Replace pair if it exists */
+  if(sld_map_has_key(map, key))
+    sld_map_delete(map, key);
+
+  return_value = sld_vector_add(map->keys, key);
+  if(return_value == RETURN_FAILURE)
+    return RETURN_FAILURE;
+
+  return_value = sld_vector_add(map->values, value);
+  /* If previous key operation succeeded, but the value add failed,
+     undo the key add to maintain integrity. */
+  if(return_value == RETURN_FAILURE)
+    sld_vector_pop(map->keys);
+
+  return return_value;
+}
+
+SLD_BOOL sld_map_delete(struct sld_map *map, char *key)
+{
+  int i;
+
+  for(i = 0; i < sld_vector_objects(map->keys); i++)
+  {
+    if(strcmp(key, (char *)sld_vector_get(map->keys, i)) == 0)
+    {
+      sld_vector_delete(map->keys, i);
+      sld_vector_delete(map->values, i);
+      return SLD_TRUE;
+    }
+  }
+
+  return SLD_FALSE;
+}
+
+SLD_BOOL sld_map_has_key(struct sld_map *map, char *key)
+{
+  int i;
+
+  for(i = 0; i < sld_map_size(map); i++)
+  {
+    if(strcmp(key, (char *)sld_vector_get(map->keys, i)) == 0)
+      return SLD_TRUE;
+  }
+
+  return SLD_FALSE;
+}
+
+void *sld_map_get_value(struct sld_map *map, char *key)
+{
+  int i;
+
+  for(i = 0; i < sld_map_size(map); i++)
+  {
+    if(strcmp(key, (char *)sld_vector_get(map->keys, i)) == 0)
+      return sld_vector_get(map->values, i);
+  }
+
+  return "";
+}
+
+void sld_map_free(struct sld_map *map)
+{
+  if(sld_map_size(map) != 0)
+  {
+    sld_vector_free(map->keys);
+    sld_vector_free(map->values);
+    free(map->keys);
+    free(map->values);
+  }
+
+  return;
+}

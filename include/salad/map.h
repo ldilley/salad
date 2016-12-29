@@ -21,4 +21,24 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include "salad/types.h"
+#include "salad/vector.h"
+
+typedef struct sld_map
+{
+  /* No hashing occurs using two arrays. The key and value pairs are
+     simply mapped to the same index in both arrays. Perhaps a table
+     or map with hashing will be added later... */
+  struct sld_vector *keys;
+  struct sld_vector *values;
+} sld_map;
+
+SLD_SSINT sld_map_init(struct sld_map *map);
+SLD_UINT sld_map_size(struct sld_map *map);
+SLD_SSINT sld_map_add(struct sld_map *map, char *key, void *value);
+SLD_BOOL sld_map_delete(struct sld_map *map, char *key);
+SLD_BOOL sld_map_has_key(struct sld_map *map, char *key);
+void *sld_map_get_value(struct sld_map *map, char *key);
+void sld_map_free(struct sld_map *map);
+
 #endif /* MAP_H */
