@@ -20,7 +20,7 @@
 
 /* This is a test program that makes use of libsalad for demonstrational purposes. */
 
-#include <stdio.h>  /* printf(), puts() */
+#include <stdio.h>  /* printf() */
 
 /* Local includes */
 #include "salad/map.h"
