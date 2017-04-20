@@ -21,6 +21,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+#define VERSION 1.0.15
 #define EXIT_ON_FAILURE
 
 #endif /* CONFIG_H */

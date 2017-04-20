@@ -12,13 +12,16 @@ LIBS2   = -lsalad_daemon
 LINK    = gcc
 
 # Build rules
-all: daemon list map queue stack vector
+all: daemon list log map queue stack vector
 
 daemon:
 	$(CC) $(CFLAGS) -o daemon $(LIBPATH) $(INCPATH) $(LIBS1) $(LIBS2) daemon.c
 
 list:
 	$(CC) $(CFLAGS) -o list $(LIBPATH) $(INCPATH) $(LIBS1) list.c
+
+log:
+	$(CC) $(CFLAGS) -o log $(LIBPATH) $(INCPATH) $(LIBS1) log.c
 
 map:
 	$(CC) $(CFLAGS) -o map $(LIBPATH) $(INCPATH) $(LIBS1) map.c
@@ -33,4 +36,4 @@ vector:
 	$(CC) $(CFLAGS) -o vector $(LIBPATH) $(INCPATH) $(LIBS1) vector.c
 
 clean:
-	rm -f *.o daemon list map queue stack tree vector
+	rm -f *.o daemon list log map queue stack tree vector

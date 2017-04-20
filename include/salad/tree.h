@@ -21,4 +21,9 @@
 #ifndef TREE_H
 #define TREE_H
 
+#include "salad/list.h"
+#include "salad/types.h"
+
+
+
 #endif /* TREE_H */

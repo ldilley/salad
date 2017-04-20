@@ -10,8 +10,13 @@
 logs/
 samples/daemon
 samples/list
+samples/log
 samples/map
 samples/queue
 samples/stack
 samples/tree
 samples/vector
+cmake_install.cmake
+CMakeCache.txt
+CMakeFiles/
+Makefile

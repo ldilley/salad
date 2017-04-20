@@ -13,6 +13,7 @@ LDFLAGS = -shared
 # Files
 HEADERS = include/salad/config.h \
           include/salad/list.h \
+          include/salad/log.h \
           include/salad/map.h \
           include/salad/memory.h \
           include/salad/network.h \
@@ -26,6 +27,7 @@ HEADERS = include/salad/config.h \
           include/salad/types.h \
           include/salad/vector.h
 SOURCES = src/list.c \
+          src/log.c \
           src/map.c \
           src/memory.c \
           src/network.c \
@@ -38,6 +40,7 @@ SOURCES = src/list.c \
           src/tree.c \
           src/vector.c
 OBJECTS = src/list.o \
+          src/log.o \
           src/map.o \
           src/memory.o \
           src/network.o \
