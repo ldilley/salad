@@ -3,19 +3,20 @@
  * Copyright (C) 2016 Lloyd Dilley
  * http://www.dilley.me/
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
+ * This file is part of Salad.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * Salad is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License
+ * as published by the Free Software Foundation; either version
+ * 3 of the License, or (at your option) any later version.
  *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * Salad is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with Salad. If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <errno.h>  /* errno */
@@ -143,6 +144,22 @@ void *sld_map_get_value(struct sld_map *map, char *key)
   }
 
   return "";
+}
+
+void *sld_map_key_at(struct sld_map *map, SLD_UINT index)
+{
+  if(index > sld_vector_objects(map->keys))
+    return "";
+
+  return sld_vector_get(map->keys, index);
+}
+
+void *sld_map_value_at(struct sld_map *map, SLD_UINT index)
+{
+  if(index > sld_vector_objects(map->values))
+    return "";
+
+  return sld_vector_get(map->values, index);
 }
 
 void sld_map_free(struct sld_map *map)

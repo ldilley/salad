@@ -12,6 +12,7 @@ samples/daemon
 samples/list
 samples/log
 samples/map
+samples/options
 samples/queue
 samples/stack
 samples/tree
