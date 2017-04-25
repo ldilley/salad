@@ -1,0 +1,20 @@
+# Travis CI build config for salad
+
+language: c
+
+- compiler: gcc
+  os: linux
+  env: CONFIG=cmake
+- compiler: clang
+  os: linux
+  env: CONFIG=cmake
+
+script:
+  - cmake . && make
+
+notifications:
+  email: false
+  irc:
+    - "irc.dilley.me#sysadmininkudzu"
+    - "chat.freenode.net#libsalad"
+    - "irc.oftc.net#salad"
