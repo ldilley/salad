@@ -1,13 +1,10 @@
-# Travis CI build config for salad
+# Travis CI build config for Salad
 
 language: c
 
-- compiler: gcc
-  os: linux
-  env: CONFIG=cmake
-- compiler: clang
-  os: linux
-  env: CONFIG=cmake
+compiler:
+  - clang
+  - gcc
 
 script:
   - cmake . && make
