@@ -35,9 +35,9 @@
 /*! A sld_vector is a resizeable array */
 typedef struct sld_vector
 {
-  void **objects;   /!*< contains the data housed in the sld_vector */
-  int capacity;     /!*< contains the size of the sld_vector */
-  int object_count; /!*< contains the number of objects in the sld_vector */
+  void **objects;   /*!< contains the data housed in the sld_vector */
+  int capacity;     /*!< contains the size of the sld_vector */
+  int object_count; /*!< contains the number of objects in the sld_vector */
 } sld_vector;
 
 /*!
