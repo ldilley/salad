@@ -25,6 +25,4 @@
 #include "salad/list.h"
 #include "salad/types.h"
 
-
-
 #endif /* TREE_H */

@@ -82,5 +82,5 @@ SLD_SSINT sld_options_read(const char *file_name, struct sld_map *options)
 
   fclose(options_file);
 
-  return 0;
+  return RETURN_SUCCESS;
 }

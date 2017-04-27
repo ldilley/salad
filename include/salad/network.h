@@ -24,9 +24,31 @@
 
 #include "salad/types.h"
 
+/*!
+ * @brief Connects to a destination host on the specified port
+ * @param host the destination hostname
+ * @param port the destination port number
+ * @return Success or failure
+ */
 SLD_SSINT sld_network_connect(char *host, SLD_USINT port);
+
+/*!
+ * @brief Terminates a connection
+ * @return Success or failure
+ */
 SLD_SSINT sld_network_disconnect();
-SLD_ULINT sld_network_receive(char *packet);
+
+/*!
+ * @brief Receives data from a network connection
+ * @return Size of data received in bytes
+ */
+SLD_ULINT sld_network_receive();
+
+/*!
+ * @brief Sends data to a destination host
+ * @param packet bytes to send
+ * @return Size of data sent in bytes
+ */
 SLD_ULINT sld_network_send(char *packet);
 
 #endif /* NETWORK_H */

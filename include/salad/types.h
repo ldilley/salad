@@ -22,19 +22,40 @@
 #ifndef TYPES_H
 #define TYPES_H
 
+/*! A zero value is false */
 #define SLD_FALSE 0
+
+/*! A non-zero value is true */
 #define SLD_TRUE !(SLD_FALSE)
 
+/*! A zero return value is a success */
 #define RETURN_SUCCESS 0
+
+/*! A -1 return value is a failure */
 #define RETURN_FAILURE -1
 
+/*! An unsigned char is 1 byte */
 typedef unsigned char SLD_BYTE;
+
+/*! SLD_SSINT is a signed short */
 typedef signed short int SLD_SSINT;
+
+/*! SLD_USINT is an unsigned short */
 typedef unsigned short int SLD_USINT;
+
+/*! SLD_SINT is a signed int */
 typedef signed int SLD_SINT;
+
+/*! SLD_UINT is an unsigned int */
 typedef unsigned int SLD_UINT;
+
+/*! SLD_SLINT is a signed long */
 typedef signed long int SLD_SLINT;
+
+/*! SLD_ULINT is an unsigned long */
 typedef unsigned long int SLD_ULINT;
+
+/*! SLD_BOOL is an unsigned short */
 typedef SLD_USINT SLD_BOOL;
 
 #endif /* TYPES_H */

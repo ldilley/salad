@@ -19,13 +19,23 @@
  * License along with Salad. If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*! @example log.c */
+
 #ifndef LOG_H
 #define LOG_H
 
 #include "salad/types.h"
 
+/*! Contains constants for log severity */
 typedef enum { DBUG = 0, INFO = 1, WARN = 2, CRIT = 3 } sld_log_severity;
 
+/*!
+ * @brief Writes the specified text to the provided log file with the given severity
+ * @param file_name log file name
+ * @param severity log severity
+ * @param text text entry for log
+ * @return Success or failure
+ */
 SLD_SSINT sld_log_write(const char *file_name, sld_log_severity severity, const char *text);
 
 #endif /* LOG_H */
