@@ -19,13 +19,31 @@
  * License along with Salad. If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*! @example daemon.c */
+
 #ifndef DAEMON_H
 #define DAEMON_H
 
 #include <sys/types.h>
 
+/*!
+ * @brief Executes code contained in sld_daemon_start() as a background process using the specified options
+ * @param pid_file_name path to PID (process ID) file
+ * @param runas_user user account to run process as
+ * @param runas_group group to run process as
+ */
 void sld_daemon_daemonize(char *pid_file_name, char *runas_user, char *runas_group);
+
+/*!
+ * @brief Wrap code within this function to execute it as a background process
+ */
 void sld_daemon_start();
+
+/*!
+ * @brief Writes the PID (process ID) to the specified file
+ * @param pid_file_name path to PID (process ID) file
+ * @return PID (process ID) of running process
+ */
 pid_t sld_daemon_write_pid_file(char *pid_file_name);
 
 #endif /* DAEMON_H */

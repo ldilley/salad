@@ -187,11 +187,16 @@ char *sld_string_uncapitalize(char *string)
   return uncapitalized_string;
 }
 
-int sld_string_casecmp(char *string1, char *string2)
+SLD_BOOL sld_string_casecmp(char *string1, char *string2)
 {
+  SLD_BOOL return_value = SLD_FALSE;
   char *cmp_string1 = sld_string_capitalize(string1);
   char *cmp_string2 = sld_string_capitalize(string2);
-  return strcmp(cmp_string1, cmp_string2);
+
+  if(strcmp(cmp_string1, cmp_string2) == 0)
+    return_value = SLD_TRUE;
+
+  return return_value;
 }
 
 char *sld_string_multiply(char *string, int factor, char separator)

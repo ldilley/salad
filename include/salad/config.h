@@ -19,10 +19,24 @@
  * License along with Salad. If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*!
+ * @mainpage API
+ * @section intro_sec Introduction
+ * Salad is a C library with an assortment of useful stuff.
+ */
+
 #ifndef CONFIG_H
 #define CONFIG_H
 
+/*! Salad version */
 #define VERSION 1.0.15
+
+/*!
+ * Defining EXIT_ON_FAILURE will cause Salad functions to become
+ * more sensitive to failures which will more likely result in
+ * termination of the program in the event such failures are
+ * encountered. 
+ */
 #define EXIT_ON_FAILURE
 
 #endif /* CONFIG_H */

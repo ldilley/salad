@@ -19,12 +19,20 @@
  * License along with Salad. If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*! @example options.c */
+
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
 #include "salad/map.h"
 #include "salad/types.h"
 
+/*!
+ * @brief Parses the specified configuration file and stores the results in a sld_map
+ * @param file_name a configuration file name to parse
+ * @param options an initialized sld_map to populate with key/value pairs
+ * @return Success or failure
+ */
 SLD_SSINT sld_options_read(const char *file_name, struct sld_map *options);
 
 #endif /* OPTIONS_H */
