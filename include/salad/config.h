@@ -21,12 +21,21 @@
 
 /*!
  * @mainpage API
- * @section intro_sec Introduction
- * Salad is a C library with an assortment of useful stuff.
+ * @section about_section About
+ * Salad is a C library with an assortment of useful stuff.<br><br>
+ * Visit the project on <a href="http://www.github.com/ldilley/salad">GitHub</a>.<br><br>
+ * Salad is copyright &copy; 2016 by <a href="http://www.dilley.me/">Lloyd Dilley</a> under
+ * the terms of the <a href="https://www.gnu.org/licenses/lgpl-3.0.txt">GNU LGPL 3</a>.
  */
 
 #ifndef CONFIG_H
 #define CONFIG_H
+
+/*!
+ * @defgroup sld_config
+ * This module contains various macros related to configuration.
+ * @{
+ */
 
 /*! Salad version */
 #define VERSION 1.0.15
@@ -38,5 +47,7 @@
  * encountered. 
  */
 #define EXIT_ON_FAILURE
+
+/*! @} */
 
 #endif /* CONFIG_H */

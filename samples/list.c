@@ -34,7 +34,7 @@ int main()
 
   sld_list_init(&list);
 
-  printf("Initial list size: %d\n", sld_list_size(&list));
+  printf("Initial list size: %u\n", sld_list_size(&list));
 
   sld_list_add(&list, "Hello");
   sld_list_add(&list, "world!");

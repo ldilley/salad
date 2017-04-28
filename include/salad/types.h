@@ -22,6 +22,12 @@
 #ifndef TYPES_H
 #define TYPES_H
 
+/*!
+ * @defgroup sld_types
+ * This module contains custom data types.
+ * @{
+ */
+
 /*! A zero value is false */
 #define SLD_FALSE 0
 
@@ -57,5 +63,7 @@ typedef unsigned long int SLD_ULINT;
 
 /*! SLD_BOOL is an unsigned short */
 typedef SLD_USINT SLD_BOOL;
+
+/*! @} */
 
 #endif /* TYPES_H */

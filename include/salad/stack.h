@@ -29,6 +29,12 @@
 #include "salad/vector.h"
 
 /*!
+ * @defgroup sld_stack
+ * This module contains enums, functions, and structures related to sld_stack objects.
+ * @{
+ */
+
+/*!
  * These constants allow the user to define how stack data should reside
  * in memory (contiguous or not.) This can also affect performance
  * (resizing arrays can be expensive in the case of a vector for example.)
@@ -49,6 +55,11 @@ typedef struct sld_stack
  * @param stack an uninitialized sld_stack
  * @param stack_type can be either a sld_stack_list or sld_stack_vector
  * @return Success or failure
+ * @relates sld_stack
+@code
+sld_stack stack;
+sld_stack_init(&stack, sld_stack_list);
+@endcode
  */
 SLD_SSINT sld_stack_init(struct sld_stack *stack, sld_stack_type stack_type);
 
@@ -56,6 +67,10 @@ SLD_SSINT sld_stack_init(struct sld_stack *stack, sld_stack_type stack_type);
  * @brief Returns the size of a sld_stack
  * @param stack an initialized sld_stack
  * @return The size of the passed sld_stack
+ * @relates sld_stack
+@code
+printf("There are %u items in the stack.\n", sld_stack_size(&stack));
+@endcode
  */
 SLD_UINT sld_stack_size(struct sld_stack *stack);
 
@@ -64,6 +79,10 @@ SLD_UINT sld_stack_size(struct sld_stack *stack);
  * @param stack an initialized sld_stack
  * @param object an arbitrary object
  * @return Success or failure
+ * @relates sld_stack
+@code
+sld_stack_push(&stack, "foo");
+@endcode
  */
 SLD_SSINT sld_stack_push(struct sld_stack *stack, void *object);
 
@@ -71,6 +90,10 @@ SLD_SSINT sld_stack_push(struct sld_stack *stack, void *object);
  * @brief Returns and removes the object at the top of a sld_stack
  * @param stack an initialized sld_stack
  * @return The object at the top of the passed sld_stack
+ * @relates sld_stack
+@code
+puts((char *)sld_stack_pop(&stack));
+@endcode
  */
 void *sld_stack_pop(struct sld_stack *stack);
 
@@ -78,13 +101,23 @@ void *sld_stack_pop(struct sld_stack *stack);
  * @brief Returns the object at the top of a sld_stack
  * @param stack an initialized sld_stack
  * @return The object at the top of the passed sld_stack
+ * @relates sld_stack
+@code
+puts((char *)sld_stack_pop(&stack));
+@endcode
  */
 void *sld_stack_peek(struct sld_stack *stack);
 
 /*!
  * @brief Frees any memory allocated for an initialized sld_stack
  * @param stack an initialized sld_stack
+ * @relates sld_stack
+@code
+sld_stack_free(&stack);
+@endcode
  */
 void sld_stack_free(struct sld_stack *stack);
+
+/*! @} */
 
 #endif /* STACK_H */

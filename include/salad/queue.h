@@ -25,6 +25,12 @@
 #define QUEUE_H
 
 /*!
+ * @defgroup sld_queue
+ * This module contains enums, functions, and structures related to sld_queue objects.
+ * @{
+ */
+
+/*!
  * These constants allow the user to define how queue data should reside
  * in memory (contiguous or not.) This can also affect performance
  * (resizing arrays can be expensive in the case of a vector for example.)
@@ -45,6 +51,11 @@ typedef struct sld_queue
  * @param queue an uninitialized sld_queue
  * @param queue_type can be either a sld_queue_list or sld_queue_vector
  * @return Success or failure
+ * @relates sld_queue
+@code
+sld_queue queue;
+sld_queue_init(&queue, sld_queue_list);
+@endcode
  */
 SLD_SSINT sld_queue_init(struct sld_queue *queue, sld_queue_type queue_type);
 
@@ -52,6 +63,10 @@ SLD_SSINT sld_queue_init(struct sld_queue *queue, sld_queue_type queue_type);
  * @brief Returns the size of a sld_queue
  * @param queue an initialized sld_queue
  * @return The size of the passed sld_queue
+ * @relates sld_queue
+@code
+printf("The queue currently has %u items waiting.\n", sld_queue_size());
+@endcode
  */
 SLD_UINT sld_queue_size(struct sld_queue *queue);
 
@@ -60,6 +75,10 @@ SLD_UINT sld_queue_size(struct sld_queue *queue);
  * @param queue an initialized sld_queue
  * @param object an arbitrary object
  * @return Success or failure
+ * @relates sld_queue
+@code
+sld_queue_add(&queue, "foo");
+@endcode
  */
 SLD_SSINT sld_queue_add(struct sld_queue *queue, void *object);
 
@@ -67,6 +86,10 @@ SLD_SSINT sld_queue_add(struct sld_queue *queue, void *object);
  * @brief Returns and removes the first object in a sld_queue
  * @param queue an initialized sld_queue
  * @return The first object in the passed sld_queue
+ * @relates sld_queue
+@code
+sld_queue_remove(&queue);
+@endcode
  */
 void *sld_queue_remove(struct sld_queue *queue);
 
@@ -74,13 +97,23 @@ void *sld_queue_remove(struct sld_queue *queue);
  * @brief Returns the first object in a sld_queue
  * @param queue an initialized sld_queue
  * @return The first object in the passed sld_queue
+ * @relates sld_queue
+@code
+puts((char *)sld_queue_peek(&queue));
+@endcode
  */
 void *sld_queue_peek(struct sld_queue *queue);
 
 /*!
  * @brief Frees any memory allocated for an initialized sld_queue
  * @param queue an initialized sld_queue
+ * @relates sld_queue
+@code
+sld_queue_free(&queue);
+@endcode
  */
 void sld_queue_free(struct sld_queue *queue);
+
+/*! @} */
 
 #endif /* QUEUE_H */

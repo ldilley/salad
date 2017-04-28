@@ -33,7 +33,7 @@ int main()
 
   sld_map_init(&map);
 
-  printf("Initial map size: %d\n", sld_map_size(&map));
+  printf("Initial map size: %u\n", sld_map_size(&map));
 
   sld_map_add(&map, "foo", "bar");
 
