@@ -24,19 +24,33 @@
 
 #include <time.h>
 
+/*!
+ * @defgroup sld_time
+ * This module contains functions related to dates and times.
+ * @{
+ */
+
 /*! A time structure */
 struct tm *timedata;
 
 /*!
  * @brief Returns the time in seconds since the epoch (01/01/1970 @ 00:00:00 UTC)
  * @return Time in seconds since the epoch (01/01/1970 @ 00:00:00 UTC)
+@code
+printf("There have been %ld seconds since the epoch.\n", sld_time_epoch_seconds());
+@endcode
  */
 time_t sld_time_epoch_seconds();
 
 /*!
  * @brief Returns a pretty timestamp in the format: Wed Apr 19 21:27:08 2017
  * @return A pretty timestamp in the format: Wed Apr 19 21:27:08 2017
+@code
+puts(sld_time_pretty_timestamp());
+@endcode
  */
 char *sld_time_pretty_timestamp();
+
+/*! @} */
 
 #endif /* TIME_H */

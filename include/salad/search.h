@@ -22,4 +22,14 @@
 #ifndef SEARCH_H
 #define SEARCH_H
 
+/*!
+ * @note The sld_search functions are not yet implemented!
+ * @todo Implement sld_search functionality!
+ * @defgroup sld_search
+ * This module contains functions related to searching for data.
+ * @{
+ */
+
+/*! @} */
+
 #endif /* SEARCH_H */

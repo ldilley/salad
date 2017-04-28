@@ -25,4 +25,14 @@
 #include "salad/list.h"
 #include "salad/types.h"
 
+/*!
+ * @note The sld_tree functions are not yet implemented!
+ * @todo Implement sld_tree functionality!
+ * @defgroup sld_tree
+ * This module contains enums, functions, and structures related to sld_tree objects.
+ * @{
+ */
+
+/*! @} */
+
 #endif /* TREE_H */

@@ -22,4 +22,14 @@
 #ifndef SORT_H
 #define SORT_H
 
+/*!
+ * @note The sld_sort functions are not yet implemented!
+ * @todo Implement sld_sort functionality!
+ * @defgroup sld_sort
+ * This module contains functions related to sorting data.
+ * @{
+ */
+
+/*! @} */
+
 #endif /* SORT_H */

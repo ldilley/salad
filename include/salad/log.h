@@ -26,6 +26,12 @@
 
 #include "salad/types.h"
 
+/*!
+ * @defgroup sld_log
+ * This module contains enums and functions related to logging.
+ * @{
+ */
+
 /*! Contains constants for log severity */
 typedef enum { DBUG = 0, INFO = 1, WARN = 2, CRIT = 3 } sld_log_severity;
 
@@ -35,7 +41,12 @@ typedef enum { DBUG = 0, INFO = 1, WARN = 2, CRIT = 3 } sld_log_severity;
  * @param severity log severity
  * @param text text entry for log
  * @return Success or failure
+@code
+sld_log_write("salad.log", INFO, "This is only a test.");
+@endcode
  */
 SLD_SSINT sld_log_write(const char *file_name, sld_log_severity severity, const char *text);
+
+/*! @} */
 
 #endif /* LOG_H */
