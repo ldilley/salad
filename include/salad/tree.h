@@ -22,16 +22,30 @@
 #ifndef TREE_H
 #define TREE_H
 
-#include "salad/list.h"
 #include "salad/types.h"
 
 /*!
- * @note The sld_tree functions are not yet implemented!
- * @todo Implement sld_tree functionality!
  * @defgroup sld_tree
  * This module contains enums, functions, and structures related to sld_tree objects.
+ * @note The sld_tree functions are not yet implemented!
+ * @todo Implement sld_tree functionality!
  * @{
  */
+
+/*! A sld_node contained within a tree */
+typedef struct sld_tree_node
+{
+  void *object;                /*!< ambiguous object contained within the node */
+  struct sld_tree_node *left;  /*!< pointer to left node in memory */
+  struct sld_tree_node *right; /*!< pointer to right node in memory */
+} sld_node;
+
+/*! A sld_tree contains sld_tree_node structures */
+typedef struct sld_tree
+{
+  SLD_UINT size;         /*!< contains the size of the sld_tree */
+  struct sld_node *root; /*!< the starting sld_tree_node of the sld_tree */
+} sld_tree;
 
 /*! @} */
 

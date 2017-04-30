@@ -38,7 +38,7 @@
  */
 
 /*! Salad version */
-#define VERSION 1.0.15
+#define VERSION 1.0.16
 
 /*!
  * Defining EXIT_ON_FAILURE will cause Salad functions to become
@@ -47,6 +47,11 @@
  * encountered. 
  */
 #define EXIT_ON_FAILURE
+
+#if __STDC_VERSION__ >= 199901L
+/*! Defining C99 enables newer features. */
+#define C99
+#endif
 
 /*! @} */
 

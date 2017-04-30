@@ -32,7 +32,7 @@
 SLD_SSINT sld_list_init(struct sld_list *list)
 {
   list->size = 0;
-  list->head = (struct sld_node *)malloc(sizeof(struct sld_node));
+  list->head = (struct sld_list_node *)malloc(sizeof(struct sld_list_node));
 
   if(list->head == NULL)
   {
@@ -59,8 +59,8 @@ SLD_UINT sld_list_size(struct sld_list *list)
 
 SLD_SSINT sld_list_add(struct sld_list *list, void *object)
 {
-  struct sld_node *current = NULL;
-  struct sld_node *new = NULL;
+  struct sld_list_node *current = NULL;
+  struct sld_list_node *new = NULL;
 
   current = list->head;
 
@@ -76,7 +76,7 @@ SLD_SSINT sld_list_add(struct sld_list *list, void *object)
     {
       if(current->next == NULL)
       {
-        new = (struct sld_node *)malloc(sizeof(struct sld_node));
+        new = (struct sld_list_node *)malloc(sizeof(struct sld_list_node));
         if(new == NULL)
         {
           printf("Unable to allocate memory for list: %s\n", strerror(errno));
@@ -104,7 +104,7 @@ SLD_SSINT sld_list_add(struct sld_list *list, void *object)
 
 void sld_list_delete(struct sld_list *list, SLD_UINT index)
 {
-  struct sld_node *current = NULL;
+  struct sld_list_node *current = NULL;
   int i = 0;
 
   if(index > sld_list_size(list))
@@ -147,7 +147,7 @@ void sld_list_delete(struct sld_list *list, SLD_UINT index)
 
 void *sld_list_get(struct sld_list *list, SLD_UINT index)
 {
-  struct sld_node *current = NULL;
+  struct sld_list_node *current = NULL;
   void *object = NULL;
   int i = 0;
 
@@ -182,8 +182,8 @@ void *sld_list_pop(struct sld_list *list)
 
 void sld_list_free(struct sld_list *list)
 {
-  struct sld_node *current = NULL;
-  struct sld_node *next = NULL;
+  struct sld_list_node *current = NULL;
+  struct sld_list_node *next = NULL;
 
   current = list->head;
 

@@ -37,6 +37,7 @@
  * @param pid_file_name path to PID (process ID) file
  * @param runas_user user account to run process as -- use NULL to run the process as the current user
  * @param runas_group group to run process as -- use NULL to run the process as the current primary group
+ *
 @code
 sld_daemon_daemonize("salad.pid", "foo", "bar");
 @endcode
@@ -45,6 +46,7 @@ void sld_daemon_daemonize(char *pid_file_name, char *runas_user, char *runas_gro
 
 /*!
  * @brief Wrap code within this function to execute it as a background process
+ *
 @code
 sld_daemon_start()
 {
@@ -62,6 +64,7 @@ void sld_daemon_start();
  * @brief Writes the PID (process ID) to the specified file
  * @param pid_file_name path to PID (process ID) file
  * @return PID (process ID) of running process
+ *
 @code
 sld_daemon_write_pid_file("salad.pid");
 @endcode

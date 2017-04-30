@@ -25,10 +25,10 @@
 #include "salad/types.h"
 
 /*!
- * @note The sld_network functions are not yet implemented!
- * @todo Implement sld_network functionality!
  * @defgroup sld_network
  * This module contains functions related to networking.
+ * @note The sld_network functions are not yet implemented!
+ * @todo Implement sld_network functionality!
  * @{
  */
 
@@ -37,6 +37,7 @@
  * @param host the destination hostname
  * @param port the destination port number
  * @return Success or failure
+ *
 @code
 sld_network_connect("localhost", 23);
 @endcode
@@ -46,6 +47,7 @@ SLD_SSINT sld_network_connect(char *host, SLD_USINT port);
 /*!
  * @brief Terminates a connection
  * @return Success or failure
+ *
 @code
 sld_network_disconnect();
 @endcode
@@ -55,6 +57,7 @@ SLD_SSINT sld_network_disconnect();
 /*!
  * @brief Receives data from a network connection
  * @return Size of data received in bytes
+ *
 @code
 printf("%lu bytes were received.\n", sld_network_receive());
 @endcode
@@ -65,6 +68,7 @@ SLD_ULINT sld_network_receive();
  * @brief Sends data to a destination host
  * @param packet bytes to send
  * @return Size of data sent in bytes
+ *
 @code
 printf("%lu bytes were sent.\n", sld_network_send(data));
 @endcode
