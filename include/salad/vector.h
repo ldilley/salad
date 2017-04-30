@@ -51,6 +51,7 @@ typedef struct sld_vector
  * @param vector an uninitialized sld_vector
  * @return Success or failure
  * @relates sld_vector
+ *
 @code
 sld_vector vector;
 sld_vector_init(&vector);
@@ -64,6 +65,7 @@ SLD_SSINT sld_vector_init(sld_vector *vector);
  * @param size an initial size
  * @return Success or failure
  * @relates sld_vector
+ *
 @code
 sld_vector vector;
 sld_vector_init_size(&vector, 32);
@@ -76,6 +78,7 @@ SLD_SSINT sld_vector_init_size(sld_vector *vector, int size);
  * @param vector an initialized sld_vector
  * @return The number of objects contained within the passed sld_vector
  * @relates sld_vector
+ *
 @code
 if(sld_vector_objects(&vector) < sld_vector_size(&vector))
   puts("We can shove more into the vector!");
@@ -88,6 +91,7 @@ SLD_UINT sld_vector_objects(sld_vector *vector);
  * @param vector an initialized sld_vector
  * @return The capacity of the passed sld_vector
  * @relates sld_vector
+ *
 @code
 if(sld_vector_size(&vector) == sld_vector_objects(&vector))
   puts("We need to resize the vector!");
@@ -101,6 +105,7 @@ SLD_UINT sld_vector_size(sld_vector *vector);
  * @param new_size the new size of the sld_vector
  * @return Success or failure
  * @relates sld_vector
+ *
 @code
 sld_vector_resize(&vector, 64);
 @endcode
@@ -113,6 +118,7 @@ SLD_SSINT sld_vector_resize(sld_vector *vector, int new_size);
  * @param object an arbitrary object
  * @return Success or failure
  * @relates sld_vector
+ *
 @code
 sld_vector_add(&vector, "foo");
 @endcode
@@ -125,6 +131,7 @@ SLD_SSINT sld_vector_add(sld_vector *vector, void *object);
  * @param index an index where an object resides within the sld_vector
  * @return The object residing at the specified index
  * @relates sld_vector
+ *
 @code
 puts((char *)sld_vector_get(&vector, 13));
 @endcode
@@ -137,6 +144,7 @@ void *sld_vector_get(sld_vector *vector, int index);
  * @param index an index where an object may reside within the sld_vector
  * @param object an arbitrary object
  * @relates sld_vector
+ *
 @code
 sld_vector_set(&vector, 21, "foo");
 @endcode
@@ -148,6 +156,7 @@ void sld_vector_set(sld_vector *vector, int index, void *object);
  * @param vector an initialized sld_vector
  * @return The last object in the passed sld_vector
  * @relates sld_vector
+ *
 @code
 puts((char *)sld_vector_pop(&vector));
 @endcode
@@ -159,6 +168,7 @@ void *sld_vector_pop(sld_vector *vector);
  * @param vector an initialized sld_vector
  * @param index an index where an object resides within the sld_vector
  * @relates sld_vector
+ *
 @code
 sld_vector_delete(&vector, 9);
 @endcode
@@ -169,6 +179,7 @@ void sld_vector_delete(sld_vector *vector, SLD_UINT index);
  * @brief Frees any memory allocated for an initialized sld_vector
  * @param vector an initialized sld_vector
  * @relates sld_vector
+ *
 @code
 sld_vector_free(&vector);
 @endcode

@@ -15,6 +15,7 @@ samples/log
 samples/map
 samples/options
 samples/queue
+samples/search
 samples/stack
 samples/tree
 samples/vector

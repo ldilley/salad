@@ -61,8 +61,51 @@ typedef signed long int SLD_SLINT;
 /*! SLD_ULINT is an unsigned long */
 typedef unsigned long int SLD_ULINT;
 
+#ifdef C99
+/*! SLD_ULINT is a long long */
+typedef unsigned long long int SLD_LLINT;
+#endif
+
 /*! SLD_BOOL is an unsigned short */
 typedef SLD_USINT SLD_BOOL;
+
+/*!
+ * These constants represent the available data structures provided by Salad.
+ */
+typedef enum
+{
+  sld_data_structure_list,
+  sld_data_structure_map,
+  sld_data_structure_queue,
+  sld_data_structure_stack,
+  sld_data_structure_tree,
+  sld_data_structure_vector
+} SLD_DATA_STRUCTURE;
+
+/*!
+ * These constants represent the possible data types potentially stored in data structures provided by Salad.
+ */
+typedef enum
+{
+  sld_data_type_char,
+  sld_data_type_signed_char,
+  sld_data_type_unsigned_char,
+  sld_data_type_short,
+  sld_data_type_signed_short,
+  sld_data_type_unsigned_short,
+  sld_data_type_int,
+  sld_data_type_signed_int,
+  sld_data_type_unsigned_int,
+  sld_data_type_long,
+  sld_data_type_signed_long,
+  sld_data_type_unsigned_long,
+#ifdef C99
+  sld_data_type_long_long,
+#endif
+  sld_data_type_float,
+  sld_data_type_double,
+  sld_data_type_char_pointer
+} SLD_DATA_TYPE;
 
 /*! @} */
 

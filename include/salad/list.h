@@ -32,19 +32,19 @@
  * @{
  */
 
-/*! A sld_node contained within a list */
-typedef struct sld_node
+/*! A sld_list_node contained within a list */
+typedef struct sld_list_node
 {
-  void *object;              /*!< ambiguous object contained within the node */
-  struct sld_node *next;     /*!< pointer to next node in memory */
-  struct sld_node *previous; /*!< pointer to previous node in memory */
-} sld_node;
+  void *object;                   /*!< ambiguous object contained within the node */
+  struct sld_list_node *next;     /*!< pointer to next node in memory */
+  struct sld_list_node *previous; /*!< pointer to previous node in memory */
+} sld_list_node;
 
 /*! A sld_list contains sld_node structures */
 typedef struct sld_list
 {
-  SLD_UINT size;         /*!< contains the size of the sld_list */
-  struct sld_node *head; /*!< the starting sld_node of the sld_list */
+  SLD_UINT size;              /*!< contains the size of the sld_list */
+  struct sld_list_node *head; /*!< the starting sld_list_node of the sld_list */
 } sld_list;
 
 /*!
@@ -52,6 +52,7 @@ typedef struct sld_list
  * @param list an uninitialized sld_list
  * @return Success or failure
  * @relates sld_list
+ *
 @code
 sld_list list;
 sld_list_init(&list); 
@@ -64,6 +65,7 @@ SLD_SSINT sld_list_init(struct sld_list *list);
  * @param list an initialized sld_list
  * @return The size of the passed sld_list
  * @relates sld_list
+ *
 @code
 for(i = 0; i < sld_list_size(&list); i++)
   ...
@@ -77,6 +79,7 @@ SLD_UINT sld_list_size(struct sld_list *list);
  * @param object an arbitrary object
  * @return Success or failure
  * @relates sld_list
+ *
 @code
 sld_list_add(&list, "foo");
 sld_list_add(&list, "bar");
@@ -89,6 +92,7 @@ SLD_SSINT sld_list_add(struct sld_list *list, void *object);
  * @param list an initialized sld_list
  * @param index an index where an object resides within the sld_list
  * @relates sld_list
+ *
 @code
 sld_list_delete(&list, 7);
 @endcode
@@ -101,6 +105,7 @@ void sld_list_delete(struct sld_list *list, SLD_UINT index);
  * @param index an index where an object resides within the sld_list
  * @return The object residing at the specified index
  * @relates sld_list
+ *
 @code
 puts((char *)sld_list_get(&list, 3));
 @endcode
@@ -112,6 +117,7 @@ void *sld_list_get(struct sld_list *list, SLD_UINT index);
  * @param list an initialized sld_list
  * @return The last object in the passed sld_list
  * @relates sld_list
+ *
 @code
 puts((char *)sld_list_pop(&list));
 @endcode
@@ -122,6 +128,7 @@ void *sld_list_pop(struct sld_list *list);
  * @brief Frees any memory allocated for an initialized sld_list
  * @param list an initialized sld_list
  * @relates sld_list
+ *
 @code
 sld_list_free(&list);
 @endcode

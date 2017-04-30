@@ -48,6 +48,7 @@ typedef struct sld_map
  * @param map an uninitialized sld_map
  * @return Success or failure
  * @relates sld_map
+ *
 @code
 sld_map map;
 sld_map_init(&map);
@@ -60,6 +61,7 @@ SLD_SSINT sld_map_init(struct sld_map *map);
  * @param map an initialized sld_map
  * @return The size of the passed sld_map
  * @relates sld_map
+ *
 @code
 printf("Initial map size: %u\n", sld_map_size(&map));
 @endcode
@@ -73,6 +75,7 @@ SLD_UINT sld_map_size(struct sld_map *map);
  * @param value an arbitrary object
  * @return Success or failure
  * @relates sld_map
+ *
 @code
 sld_map_add(&map, "foo", "bar");
 @endcode
@@ -85,6 +88,7 @@ SLD_SSINT sld_map_add(struct sld_map *map, char *key, void *value);
  * @param key a key as a string
  * @return Success or failure
  * @relates sld_map
+ *
 @code
 sld_map_delete(&map, "foo");
 @endcode
@@ -97,6 +101,7 @@ SLD_BOOL sld_map_delete(struct sld_map *map, char *key);
  * @param key a key as a string
  * @return True or false
  * @relates sld_map
+ *
 @code
 if(sld_map_has_key(&map, "foo"))
   ...
@@ -110,6 +115,7 @@ SLD_BOOL sld_map_has_key(struct sld_map *map, char *key);
  * @param key a key as a string
  * @return The object paired with the specified key
  * @relates sld_map
+ *
 @code
 puts((char *)sld_map_get_value(&map, "foo"));
 @endcode
@@ -122,6 +128,7 @@ void *sld_map_get_value(struct sld_map *map, char *key);
  * @param index an index where a key resides within the sld_map
  * @return The key residing at index
  * @relates sld_map
+ *
 @code
 puts((char *)sld_map_key_at(&map, 5));
 @endcode
@@ -134,6 +141,7 @@ void *sld_map_key_at(struct sld_map *map, SLD_UINT index);
  * @param index an index where a value resides within the sld_map
  * @return The object residing at index
  * @relates sld_map
+ *
 @code
 puts((char *)sld_map_value_at(&map, 1));
 @endcode
@@ -144,6 +152,7 @@ void *sld_map_value_at(struct sld_map *map, SLD_UINT index);
  * @brief Frees any memory allocated for an initialized sld_map
  * @param map an initialized sld_map
  * @relates sld_map
+ *
 @code
 sld_map_free(&map);
 @endcode

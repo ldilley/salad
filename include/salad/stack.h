@@ -56,6 +56,7 @@ typedef struct sld_stack
  * @param stack_type can be either a sld_stack_list or sld_stack_vector
  * @return Success or failure
  * @relates sld_stack
+ *
 @code
 sld_stack stack;
 sld_stack_init(&stack, sld_stack_list);
@@ -68,6 +69,7 @@ SLD_SSINT sld_stack_init(struct sld_stack *stack, sld_stack_type stack_type);
  * @param stack an initialized sld_stack
  * @return The size of the passed sld_stack
  * @relates sld_stack
+ *
 @code
 printf("There are %u items in the stack.\n", sld_stack_size(&stack));
 @endcode
@@ -80,6 +82,7 @@ SLD_UINT sld_stack_size(struct sld_stack *stack);
  * @param object an arbitrary object
  * @return Success or failure
  * @relates sld_stack
+ *
 @code
 sld_stack_push(&stack, "foo");
 @endcode
@@ -91,6 +94,7 @@ SLD_SSINT sld_stack_push(struct sld_stack *stack, void *object);
  * @param stack an initialized sld_stack
  * @return The object at the top of the passed sld_stack
  * @relates sld_stack
+ *
 @code
 puts((char *)sld_stack_pop(&stack));
 @endcode
@@ -102,6 +106,7 @@ void *sld_stack_pop(struct sld_stack *stack);
  * @param stack an initialized sld_stack
  * @return The object at the top of the passed sld_stack
  * @relates sld_stack
+ *
 @code
 puts((char *)sld_stack_pop(&stack));
 @endcode
@@ -112,6 +117,7 @@ void *sld_stack_peek(struct sld_stack *stack);
  * @brief Frees any memory allocated for an initialized sld_stack
  * @param stack an initialized sld_stack
  * @relates sld_stack
+ *
 @code
 sld_stack_free(&stack);
 @endcode

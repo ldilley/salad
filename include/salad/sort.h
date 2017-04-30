@@ -22,13 +22,51 @@
 #ifndef SORT_H
 #define SORT_H
 
+#include "salad/types.h"
+
 /*!
- * @note The sld_sort functions are not yet implemented!
- * @todo Implement sld_sort functionality!
  * @defgroup sld_sort
  * This module contains functions related to sorting data.
+ * @note The sld_sort functions are not yet implemented!
+ * @todo Implement sld_sort functionality!
  * @{
  */
+
+/*!
+ * @brief A simple sorting algorithm that sorts by swapping pairs of data and works well for small sets of data
+ * @param data_structure a sld_list, sld_map, sld_queue, sld_stack, sld_tree, or sld_vector
+ * @param data_structure_type any type defined by SLD_DATA_STRUCTURE such as sld_data_structure_vector for example
+ * @param data_type any type defined by SLD_DATA_TYPE such as sld_data_type_int for example
+ *
+@code
+sld_sort_bubble(&vector, sld_data_structure_vector, sld_data_type_int);
+@endcode
+ */
+void sld_sort_bubble(void *data_structure, SLD_DATA_STRUCTURE data_structure_type, SLD_DATA_TYPE data_type);
+
+/*!
+ * @brief A simple sorting algorithm that sorts by inserting data that is out of order and works well for small sets of data
+ * @param data_structure a sld_list, sld_map, sld_queue, sld_stack, sld_tree, or sld_vector
+ * @param data_structure_type any type defined by SLD_DATA_STRUCTURE such as sld_data_structure_vector for example
+ * @param data_type any type defined by SLD_DATA_TYPE such as sld_data_type_int for example
+ *
+@code
+sld_sort_insertion(&vector, sld_data_structure_vector, sld_data_type_int);
+@endcode
+ */
+void sld_sort_insertion(void *data_structure, SLD_DATA_STRUCTURE data_structure_type, SLD_DATA_TYPE data_type);
+
+/*!
+ * @brief A simple sorting algorithm that sorts by swapping data that is out of order and suffices for small sets of data
+ * @param data_structure a sld_list, sld_map, sld_queue, sld_stack, sld_tree, or sld_vector
+ * @param data_structure_type any type defined by SLD_DATA_STRUCTURE such as sld_data_structure_vector for example
+ * @param data_type any type defined by SLD_DATA_TYPE such as sld_data_type_int for example
+ *
+@code
+sld_sort_selection(&vector, sld_data_structure_vector, sld_data_type_int);
+@endcode
+ */
+void sld_sort_selection(void *data_structure, SLD_DATA_STRUCTURE data_structure_type, SLD_DATA_TYPE data_type);
 
 /*! @} */
 

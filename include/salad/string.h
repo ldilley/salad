@@ -131,6 +131,7 @@ char *sld_string_trim(char *string);
  * @param string a string potentially containing a specified character
  * @param character a character which possibly exists in the passed string
  * @return True or false
+ *
 @code
 if(sld_string_contains_character("foo", 'f')) // returns true
   ...

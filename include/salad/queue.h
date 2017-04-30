@@ -52,6 +52,7 @@ typedef struct sld_queue
  * @param queue_type can be either a sld_queue_list or sld_queue_vector
  * @return Success or failure
  * @relates sld_queue
+ *
 @code
 sld_queue queue;
 sld_queue_init(&queue, sld_queue_list);
@@ -64,6 +65,7 @@ SLD_SSINT sld_queue_init(struct sld_queue *queue, sld_queue_type queue_type);
  * @param queue an initialized sld_queue
  * @return The size of the passed sld_queue
  * @relates sld_queue
+ *
 @code
 printf("The queue currently has %u items waiting.\n", sld_queue_size());
 @endcode
@@ -76,6 +78,7 @@ SLD_UINT sld_queue_size(struct sld_queue *queue);
  * @param object an arbitrary object
  * @return Success or failure
  * @relates sld_queue
+ *
 @code
 sld_queue_add(&queue, "foo");
 @endcode
@@ -87,6 +90,7 @@ SLD_SSINT sld_queue_add(struct sld_queue *queue, void *object);
  * @param queue an initialized sld_queue
  * @return The first object in the passed sld_queue
  * @relates sld_queue
+ *
 @code
 sld_queue_remove(&queue);
 @endcode
@@ -98,6 +102,7 @@ void *sld_queue_remove(struct sld_queue *queue);
  * @param queue an initialized sld_queue
  * @return The first object in the passed sld_queue
  * @relates sld_queue
+ *
 @code
 puts((char *)sld_queue_peek(&queue));
 @endcode
@@ -108,6 +113,7 @@ void *sld_queue_peek(struct sld_queue *queue);
  * @brief Frees any memory allocated for an initialized sld_queue
  * @param queue an initialized sld_queue
  * @relates sld_queue
+ *
 @code
 sld_queue_free(&queue);
 @endcode

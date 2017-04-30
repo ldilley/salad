@@ -19,35 +19,29 @@
  * License along with Salad. If not, see <http://www.gnu.org/licenses/>.
  */
 
-/*! @example log.c */
+/* This is a test program that makes use of libsalad for demonstrational purposes. */
 
-#ifndef LOG_H
-#define LOG_H
+#include <stdio.h> /* printf() */
 
-#include "salad/types.h"
+/* Local includes */
+#include "salad/list.h"
+#include "salad/search.h"
 
-/*!
- * @defgroup sld_log
- * This module contains enums and functions related to logging.
- * @{
- */
+int main()
+{
+  sld_list list;
+  sld_list_init(&list);
 
-/*! Contains constants for log severity */
-typedef enum { DBUG = 0, INFO = 1, WARN = 2, CRIT = 3 } sld_log_severity;
+  sld_list_add(&list, (void *)1);
+  sld_list_add(&list, (void *)3);
+  sld_list_add(&list, (void *)7);
 
-/*!
- * @brief Writes the specified text to the provided log file with the given severity
- * @param file_name log file name
- * @param severity log severity
- * @param text text entry for log
- * @return Success or failure
- *
-@code
-sld_log_write("salad.log", INFO, "This is only a test.");
-@endcode
- */
-SLD_SSINT sld_log_write(const char *file_name, sld_log_severity severity, const char *text);
+  /* A non-zero return type means the criterion was not found in the data structure. */
+  printf("Index for value '5' in the list: %i\n", sld_search_linear(&list, (void *)5, sld_data_structure_list, sld_data_type_int));
+  printf("Index for value '7' in the list: %i\n", sld_search_linear(&list, (void *)7, sld_data_structure_list, sld_data_type_int));
 
-/*! @} */
+  sld_list_free(&list);
+  sld_memory_pool_nuke();
 
-#endif /* LOG_H */
+  return 0;
+}
